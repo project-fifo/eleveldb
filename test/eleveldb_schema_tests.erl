@@ -7,10 +7,10 @@
 %% basic schema test will check to make sure that all defaults from
 %% the schema make it into the generated app.config
 basic_schema_test() ->
-    %% The defaults are defined in ../priv/eleveldb.schema.
+    %% The defaults are defined in priv/eleveldb.schema.
     %% it is the file under test.
     Config = cuttlefish_unit:generate_templated_config(
-        ["../priv/eleveldb.schema"], [], context(), predefined_schema()),
+        ["priv/eleveldb.schema"], [], context(), predefined_schema()),
 
     cuttlefish_unit:assert_config(Config, "eleveldb.data_root", "./data/leveldb"),
     cuttlefish_unit:assert_config(Config, "eleveldb.total_leveldb_mem_percent", 70),
@@ -64,10 +64,10 @@ override_schema_test() ->
             {["leveldb", "tiered", "path", "slow"], "/mnt/slowpoke"}
            ],
 
-    %% The defaults are defined in ../priv/eleveldb.schema.
+    %% The defaults are defined in priv/eleveldb.schema.
     %% it is the file under test.
     Config = cuttlefish_unit:generate_templated_config(
-        ["../priv/eleveldb.schema"], Conf, context(), predefined_schema()),
+        ["priv/eleveldb.schema"], Conf, context(), predefined_schema()),
 
     cuttlefish_unit:assert_config(Config, "eleveldb.data_root", "/some/crazy/dir"),
     cuttlefish_unit:assert_config(Config, "eleveldb.total_leveldb_mem_percent", 50),
@@ -102,7 +102,7 @@ multi_backend_test() ->
             {["multi_backend", "default", "leveldb", "data_root"], "/data/default_leveldb"}
            ],
     Config = cuttlefish_unit:generate_templated_config(
-               ["../priv/eleveldb.schema", "../priv/eleveldb_multi.schema", "../test/multi_backend.schema"],
+               ["priv/eleveldb.schema", "priv/eleveldb_multi.schema", "test/multi_backend.schema"],
                Conf, context(), predefined_schema()),
 
     MultiBackendConfig = proplists:get_value(multi_backend, proplists:get_value(riak_kv, Config)),

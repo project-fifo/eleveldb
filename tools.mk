@@ -1,16 +1,16 @@
-REBAR ?= ./rebar
+REBAR ?= ./rebar3
 
 compile-no-deps:
-	${REBAR} compile skip_deps=true
+	${REBAR} compile
 
 test: compile
-	${REBAR} eunit skip_deps=true
+	${REBAR} eunit
 
 docs:
-	${REBAR} doc skip_deps=true
+	${REBAR} doc
 
 xref: compile
-	${REBAR} xref skip_deps=true
+	${REBAR} xref
 
 PLT ?= $(HOME)/.combo_dialyzer_plt
 LOCAL_PLT = .local_dialyzer_plt

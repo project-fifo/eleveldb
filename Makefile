@@ -1,17 +1,14 @@
-REBAR ?= ./rebar
+REBAR ?= ./rebar3
 
 all: compile
 
 get-deps:
 	./c_src/build_deps.sh get-deps
 
-deps:
-	${REBAR} get-deps
-
 rm-deps:
 	./c_src/build_deps.sh rm-deps
 
-compile: deps
+compile:
 	${REBAR} compile
 
 clean:
